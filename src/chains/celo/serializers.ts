@@ -4,9 +4,9 @@ import { InvalidAddressError } from '../../errors/address.js'
 import { BaseError } from '../../errors/base.js'
 import { InvalidChainIdError } from '../../errors/chain.js'
 import { FeeCapTooHighError, TipAboveFeeCapError } from '../../errors/node.js'
+import type { ChainSerializers } from '../../types/chain.js'
 import type { FeeValuesEIP1559 } from '../../types/fee.js'
 import type { Signature } from '../../types/misc.js'
-import type { Serializers } from '../../types/serializer.js'
 import type {
   AccessList,
   TransactionSerializable,
@@ -24,7 +24,7 @@ import {
 } from '../../utils/transaction/serializeTransaction.js'
 
 export const serializeTransactionCelo: SerializeTransactionFn<
-  TransactionSerializableCelo
+  CeloTransactionSerializable
 > = (tx, signature) => {
   // Handle CIP-42 transactions
   if (isCIP42(tx))
@@ -39,7 +39,7 @@ export const serializeTransactionCelo: SerializeTransactionFn<
 
 export const serializersCelo = {
   transaction: serializeTransactionCelo,
-} as const satisfies Serializers
+} as const satisfies ChainSerializers
 
 //////////////////////////////////////////////////////////////////////////////
 // Types
@@ -58,7 +58,7 @@ export type TransactionSerializableCIP42<
     type?: 'cip42'
   }
 
-export type TransactionSerializableCelo =
+export type CeloTransactionSerializable =
   | TransactionSerializableCIP42
   | TransactionSerializable
 
@@ -123,7 +123,7 @@ function serializeTransactionCIP42(
 // Utilities
 
 // process as CIP42 if any of these fields are present. realistically gatewayfee is not used but is part of spec
-function isCIP42(transaction: TransactionSerializableCelo) {
+function isCIP42(transaction: CeloTransactionSerializable) {
   if (
     'maxFeePerGas' in transaction &&
     'maxPriorityFeePerGas' in transaction &&

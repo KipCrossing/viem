@@ -1,7 +1,7 @@
 {
   "name": "viem",
   "description": "TypeScript Interface for Ethereum",
-  "version": "1.5.3",
+  "version": "1.6.1",
   "scripts": {
     "bench": "vitest bench",
     "bench:ci": "CI=true vitest bench",
@@ -71,6 +71,11 @@
       "types": "./dist/types/chains/index.d.ts",
       "import": "./dist/esm/chains/index.js",
       "default": "./dist/cjs/chains/index.js"
+    },
+    "./chains/utils": {
+      "types": "./dist/types/chains/utils.d.ts",
+      "import": "./dist/esm/chains/utils.js",
+      "default": "./dist/cjs/chains/utils.js"
     },
     "./contract": {
       "types": "./dist/types/contract.d.ts",
@@ -156,12 +161,12 @@
   },
   "dependencies": {
     "@adraffy/ens-normalize": "1.9.0",
-    "@noble/curves": "1.0.0",
+    "@noble/curves": "1.1.0",
     "@noble/hashes": "1.3.0",
     "@scure/bip32": "1.3.0",
     "@scure/bip39": "1.2.0",
     "@types/ws": "^8.5.4",
-    "@wagmi/chains": "1.6.0",
+    "@wagmi/chains": "1.7.0",
     "abitype": "0.9.3",
     "isomorphic-ws": "5.0.0",
     "ws": "8.12.0"
@@ -185,7 +190,7 @@
     "rome": "~12.1.3",
     "simple-git-hooks": "^2.8.1",
     "size-limit": "^8.2.4",
-    "typescript": "^5.0.4",
+    "typescript": "5.0.4",
     "vite": "^4.4.2",
     "vitest": "~0.30.1"
   },
